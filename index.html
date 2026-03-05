@@ -1,104 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
   <title>Marina Vasconcelos | AI Engineer</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0d1117;
-      color: #e6edf3;
-    }
-
-    header {
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-      color: #4B6F44;
-    }
-
-    h2 {
-      font-weight: normal;
-      color: #8b949e;
-    }
-
-    section {
-      max-width: 900px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-
-    .card {
-      background-color: #161b22;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 12px 20px;
-      background-color: #4B6F44;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      margin-top: 20px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px;
-      color: #8b949e;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
   <h1>Marina Vasconcelos</h1>
-  <h2>AI Engineer | Computer Vision | Machine Learning</h2>
-  <a class="button" href="https://www.linkedin.com/in/marina-vasconcelos-dev/" target="_blank">Connect on LinkedIn</a>
+  <h2 id="subtitle"></h2>
 </header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="projects.html">Projects</a>
+  <a href="blog.html">Blog</a>
+</nav>
 
 <section>
   <div class="card">
-    <h3>About</h3>
-    <p>
-      AI Engineer specialized in Computer Vision and Intelligent Document Processing.
-      Experienced in building OCR systems, validation pipelines and scalable ML solutions
-      applied to real-world business environments.
-    </p>
-  </div>
-
-  <div class="card">
-    <h3>Core Expertise</h3>
-    <p>
-      • Computer Vision<br>
-      • Optical Character Recognition (OCR)<br>
-      • Machine Learning<br>
-      • Intelligent Document Processing<br>
-      • Data Systems Architecture
-    </p>
-  </div>
-
-  <div class="card">
-    <h3>Selected Projects</h3>
-    <p>
-      Intelligent Document Processing Pipeline<br>
-      Computer Vision Classification System<br>
-      Machine Learning Optimization Models
-    </p>
+    <h3 id="aboutTitle"></h3>
+    <p id="aboutText"></p>
   </div>
 </section>
 
 <footer>
-  © 2026 Marina Vasconcelos — AI & Data Engineering
+  © 2026 Marina Vasconcelos
 </footer>
+
+<script>
+const userLang = navigator.language || navigator.userLanguage;
+
+if (userLang.startsWith("pt")) {
+  document.getElementById("subtitle").innerText =
+    "Engenheira de IA | Visão Computacional | Machine Learning";
+
+  document.getElementById("aboutTitle").innerText = "Sobre";
+  document.getElementById("aboutText").innerText =
+    "Engenheira de IA especializada em Visão Computacional e Processamento Inteligente de Documentos. Desenvolvo soluções de OCR, validação documental e modelos de Machine Learning aplicados a ambientes reais de negócio.";
+} else {
+  document.getElementById("subtitle").innerText =
+    "AI Engineer | Computer Vision | Machine Learning";
+
+  document.getElementById("aboutTitle").innerText = "About";
+  document.getElementById("aboutText").innerText =
+    "AI Engineer specialized in Computer Vision and Intelligent Document Processing. I develop OCR systems, validation pipelines and machine learning models applied to real-world business environments.";
+}
+</script>
 
 </body>
 </html>
