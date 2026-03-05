@@ -2,52 +2,39 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Marina Vasconcelos | AI Engineer</title>
+  <title>Marina Vasconcelos</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-  <h1>Marina Vasconcelos</h1>
-  <h2 id="subtitle"></h2>
-</header>
-
 <nav>
-  <a href="/index.html">Home</a>
-  <a href="/projects.html">Projects</a>
-  <a href="/blog.html">Blog</a>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
 </nav>
 
-<section>
-  <div class="card">
-    <h3 id="aboutTitle"></h3>
-    <p id="aboutText"></p>
+<div class="container">
+  <h1>Marina Vasconcelos</h1>
+  <p>AI Engineer writing about Computer Vision, OCR and Intelligent Systems.</p>
+
+  <hr>
+
+  <div class="article-preview">
+    <h2><a href="ocr-pipeline.html">Understanding OCR Pipelines in Production</a></h2>
+    <div class="date">March 2026 · 6 min read</div>
+    <p>
+      How preprocessing and validation layers dramatically improve document recognition systems.
+    </p>
   </div>
-</section>
 
-<footer>
-  © 2026 Marina Vasconcelos
-</footer>
+  <div class="article-preview">
+    <h2><a href="computer-vision-business.html">Computer Vision in Real Business Applications</a></h2>
+    <div class="date">March 2026 · 8 min read</div>
+    <p>
+      Practical applications of deep learning in document validation and automation workflows.
+    </p>
+  </div>
 
-<script>
-const userLang = navigator.language || navigator.userLanguage;
-
-if (userLang.startsWith("pt")) {
-  document.getElementById("subtitle").innerText =
-    "Engenheira de IA | Visão Computacional | Machine Learning";
-
-  document.getElementById("aboutTitle").innerText = "Sobre";
-  document.getElementById("aboutText").innerText =
-    "Engenheira de IA especializada em Visão Computacional e Processamento Inteligente de Documentos. Desenvolvo soluções de OCR, validação documental e modelos de Machine Learning aplicados a ambientes reais de negócio.";
-} else {
-  document.getElementById("subtitle").innerText =
-    "AI Engineer | Computer Vision | Machine Learning";
-
-  document.getElementById("aboutTitle").innerText = "About";
-  document.getElementById("aboutText").innerText =
-    "AI Engineer specialized in Computer Vision and Intelligent Document Processing. I develop OCR systems, validation pipelines and machine learning models applied to real-world business environments.";
-}
-</script>
+</div>
 
 </body>
 </html>
