@@ -1,3 +1,6 @@
+
+Copiar
+
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
 <head>
@@ -329,21 +332,21 @@
     <h2 class="section-title">Projetos</h2>
     <div class="section-line"></div>
     <div class="projects-grid">
-      <div class="project-card" onclick="openModal('proj', 0)" style="cursor:pointer;">
+      <div class="project-card" data-modal="proj" data-idx="0" style="cursor:pointer;">
         <div class="project-num">001</div>
         <div class="project-name">TipoRastro</div>
         <p class="project-desc">Sistema de verificação de documentos brasileiros usando análise de fontes tipográficas e redes neurais para detecção de fraudes em CNH, RG e CIN.</p>
         <div class="project-tags"><span class="tag">Python</span><span class="tag">Computer Vision</span><span class="tag">Embeddings</span><span class="tag">Siamese Network</span></div>
         <span class="project-link">Ver detalhes →</span>
       </div>
-      <div class="project-card" onclick="openModal('proj', 1)" style="cursor:pointer;">
+      <div class="project-card" data-modal="proj" data-idx="1" style="cursor:pointer;">
         <div class="project-num">002</div>
         <div class="project-name">IDENTIFICAR</div>
         <p class="project-desc">Pipeline de OCR e validação automática de regiões anotadas em documentos de identidade, combinando LabelMe e modelos de reconhecimento de texto.</p>
         <div class="project-tags"><span class="tag">OCR</span><span class="tag">LabelMe</span><span class="tag">Anti-Fraude</span><span class="tag">ML</span></div>
         <span class="project-link">Ver detalhes →</span>
       </div>
-      <div class="project-card" onclick="openModal('proj', 2)" style="cursor:pointer;">
+      <div class="project-card" data-modal="proj" data-idx="2" style="cursor:pointer;">
         <div class="project-num">003</div>
         <div class="project-name">Gato Ninja</div>
         <p class="project-desc">Jogo de stealth em Unity onde um gato ninja navega por cômodos de uma casa evitando detecção para chegar a destinos de sono absurdos.</p>
@@ -358,19 +361,19 @@
     <h2 class="section-title">Blog</h2>
     <div class="section-line"></div>
     <div class="blog-grid">
-      <div class="blog-card" onclick="openModal('blog', 0)" style="cursor:pointer;">
+      <div class="blog-card" data-modal="blog" data-idx="0" style="cursor:pointer;">
         <div class="blog-date">Jan 2025</div>
         <div class="blog-title">Como redes Siamese detectam fraudes em documentos</div>
         <p class="blog-excerpt">Explorando o uso de redes neurais para comparar padrões tipográficos em documentos de identidade brasileiros e identificar falsificações.</p>
         <span class="blog-read">Ler artigo</span>
       </div>
-      <div class="blog-card" onclick="openModal('blog', 1)" style="cursor:pointer;">
+      <div class="blog-card" data-modal="blog" data-idx="1" style="cursor:pointer;">
         <div class="blog-date">Dez 2024</div>
         <div class="blog-title">Machine Learning aplicado à verificação de identidade</div>
         <p class="blog-excerpt">Uma visão geral das técnicas de visão computacional e embeddings que uso no dia a dia para autenticar documentos com alta precisão.</p>
         <span class="blog-read">Ler artigo</span>
       </div>
-      <div class="blog-card" onclick="openModal('blog', 2)" style="cursor:pointer;">
+      <div class="blog-card" data-modal="blog" data-idx="2" style="cursor:pointer;">
         <div class="blog-date">Nov 2024</div>
         <div class="blog-title">Unity e o paradoxo do gato ninja: design de stealth</div>
         <p class="blog-excerpt">Reflexões sobre mecânicas de stealth em jogos e como implementar sistemas de detecção criativos num projeto indie com Unity.</p>
@@ -531,22 +534,21 @@
 
     document.addEventListener('DOMContentLoaded', function() {
 
-      // MODAL
+      // MODAL — event delegation, sem onclick inline
       var overlay = document.getElementById('modal-overlay');
       var content = document.getElementById('modal-content');
       var closeBtn = document.getElementById('modal-close');
 
-      window.openModal = function(type, idx) {
+      function openModal(type, idx) {
         var d = DATA[type][idx];
         var tagsHtml = '';
         if (d.tags) d.tags.forEach(function(t) { tagsHtml += '<span class="tag">' + t + '</span>'; });
-        var footerHtml = '';
-        if (d.github) footerHtml = '<div class="modal-footer"><a href="' + d.github + '" target="_blank" class="btn btn-primary">Ver no GitHub</a></div>';
+        var footerHtml = d.github ? '<div class="modal-footer"><a href="' + d.github + '" target="_blank" class="btn btn-primary">Ver no GitHub</a></div>' : '';
 
         content.innerHTML =
-          (d.num ? '<div class="modal-num">' + d.num + '</div>' : '') +
+          (d.num  ? '<div class="modal-num">'   + d.num   + '</div>' : '') +
           '<div class="modal-title">' + d.title + '</div>' +
-          (d.date ? '<div class="modal-date">' + d.date + '</div>' : '') +
+          (d.date ? '<div class="modal-date">'  + d.date  + '</div>' : '') +
           (tagsHtml ? '<div class="modal-tags">' + tagsHtml + '</div>' : '') +
           '<div class="modal-divider"></div>' +
           '<div class="modal-body">' + d.body + '</div>' +
@@ -554,12 +556,20 @@
 
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
-      };
+      }
 
       function closeModal() {
         overlay.classList.remove('open');
         document.body.style.overflow = '';
       }
+
+      // Delega cliques nos cards via data-modal
+      document.body.addEventListener('click', function(e) {
+        var card = e.target.closest('[data-modal]');
+        if (card) {
+          openModal(card.getAttribute('data-modal'), parseInt(card.getAttribute('data-idx')));
+        }
+      });
 
       closeBtn.addEventListener('click', closeModal);
       overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
